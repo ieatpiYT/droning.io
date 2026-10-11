@@ -8,9 +8,13 @@ const app = new Application();
 async function gameLoop()
 {
     await app.init({
-        canvas: canvas
+        canvas: canvas,
+        resizeTo: window
     })
 
-    
+    let map= new Map();
 
+    app.stage.addChild(map);
 }
+
+gameLoop();
