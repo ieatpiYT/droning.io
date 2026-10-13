@@ -1,3 +1,7 @@
+/*
+main.ts
+*/
+
 import {Application, Graphics} from 'pixi.js';
 import {Map} from './game/Map';
 import {Player} from './game/Player';
