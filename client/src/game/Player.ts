@@ -21,7 +21,29 @@ export class Player extends Container
         .circle(this.x, this.y, this.radius)
         .fill({color: 0xff0000});
 
-        this.addChild(visual);
+        this.addChild(visual);   
+
+        let keys = 
+        {
+            w: false,
+            a: false,
+            s: false,
+            d: false
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'KeyW') {keys.w = true};
+            if (e.code === 'KeyA') {keys.a = true};
+            if (e.code === 'KeyS') {keys.s = true};
+            if (e.code === 'KeyD') {keys.d = true};
+        })
+
+        window.addEventListener('keyup', (e) => {
+            if (e.code === 'KeyW') {keys.w = false};
+            if (e.code === 'KeyA') {keys.a = false};
+            if (e.code === 'KeyS') {keys.s = false};
+            if (e.code === 'KeyD') {keys.d = false};
+        })
     }
 }
 
