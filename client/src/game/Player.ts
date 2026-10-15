@@ -8,6 +8,8 @@ export class Player extends Container
 {
     public radius: number;
     public speed = 5;
+
+    private keys: Record<string, boolean> = {};
     
     constructor(x: number, y: number, radius: number)
     {
@@ -18,32 +20,33 @@ export class Player extends Container
         this.radius = radius;
 
         let visual = new Graphics()
-        .circle(this.x, this.y, this.radius)
+        .circle(this.x, this.x, this.radius)
         .fill({color: 0xff0000});
 
-        this.addChild(visual);   
+        this.addChild(visual);  
 
-        let keys = 
+        window.addEventListener('keydown', (e) => { this.keys[e.code] = true; });
+        window.addEventListener('keyup', (e) => { this.keys[e.code] = false; });
+    }
+
+    public update()
+    {
+        let dx = 0;
+        let dy = 0;
+
+        if (this.keys['KeyW']) dy -= 1;
+        if (this.keys['KeyS']) dy += 1;
+        if (this.keys['KeyA']) dx -= 1;
+        if (this.keys['KeyD']) dx += 1;
+
+        if (dx !== 0 && dy !== 0) 
         {
-            w: false,
-            a: false,
-            s: false,
-            d: false
+            dx *= 0.7071;
+            dy *= 0.7071;
         }
 
-        window.addEventListener('keydown', (e) => {
-            if (e.code === 'KeyW') {keys.w = true};
-            if (e.code === 'KeyA') {keys.a = true};
-            if (e.code === 'KeyS') {keys.s = true};
-            if (e.code === 'KeyD') {keys.d = true};
-        })
-
-        window.addEventListener('keyup', (e) => {
-            if (e.code === 'KeyW') {keys.w = false};
-            if (e.code === 'KeyA') {keys.a = false};
-            if (e.code === 'KeyS') {keys.s = false};
-            if (e.code === 'KeyD') {keys.d = false};
-        })
+        this.x += dx * this.speed;
+        this.y += dy * this.speed;
     }
 }
 

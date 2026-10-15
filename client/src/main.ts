@@ -15,14 +15,18 @@ async function gameLoop()
     await app.init({
         canvas: canvas,
         resizeTo: window,
-        background: '#ffffff'
+        background: '#1099bb'
     })
 
     let map = new Map();
-    let player = new Player(0, 0, 50);
+    let player = new Player(100, 100, 20);
 
     app.stage.addChild(map);
     app.stage.addChild(player);
+
+    app.ticker.add(() => {
+        player.update();
+    })
 }
 
 gameLoop();
