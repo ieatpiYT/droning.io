@@ -26,6 +26,12 @@ async function gameLoop()
 
     app.ticker.add(() => {
         player.update();
+
+        player.x = app.screen.width / 2;
+        player.y = app.screen.height / 2;
+
+        map.x = (app.screen.width / 2) - player.worldX;
+        map.y = (app.screen.height / 2) - player.worldY;
     })
 }
 

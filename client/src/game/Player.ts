@@ -7,7 +7,9 @@ import {Graphics, Container} from 'pixi.js';
 export class Player extends Container
 {
     public radius: number;
-    public speed = 5;
+    public speed = 3;
+    public worldX: number;
+    public worldY: number;
 
     private keys: Record<string, boolean> = {};
     
@@ -15,8 +17,8 @@ export class Player extends Container
     {
         super();
 
-        this.x = x;
-        this.y = y;
+        this.worldX = x;
+        this.worldY = y;
         this.radius = radius;
 
         let visual = new Graphics()
@@ -45,8 +47,8 @@ export class Player extends Container
             dy *= 0.7071;
         }
 
-        this.x += dx * this.speed;
-        this.y += dy * this.speed;
+        this.worldX += dx * this.speed;
+        this.worldY += dy * this.speed;
     }
 }
 
